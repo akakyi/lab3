@@ -1,6 +1,6 @@
 package edu.lab.back.service.validator.implementations;
 
-import edu.lab.back.json.request.CityRequestJson;
+import edu.lab.back.json.request.CityRequestPojo;
 import edu.lab.back.service.validator.CityValidator;
 import edu.lab.back.util.ValidationMessages;
 import edu.lab.back.util.exception.InvalidPayloadException;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class CityValidatorImpl implements CityValidator {
 
     @Override
-    public void validateSave(final CityRequestJson requestJson) throws InvalidPayloadException {
+    public void validateSave(final CityRequestPojo requestJson) throws InvalidPayloadException {
         if (requestJson == null) {
             throw new InvalidPayloadException(ValidationMessages.INVALID_REQUEST_JSON);
         }
@@ -23,7 +23,7 @@ public class CityValidatorImpl implements CityValidator {
     }
 
     @Override
-    public void validateUpdate(final CityRequestJson requestJson) throws InvalidPayloadException {
+    public void validateUpdate(final CityRequestPojo requestJson) throws InvalidPayloadException {
         if (requestJson == null) {
             throw new InvalidPayloadException(ValidationMessages.INVALID_REQUEST_JSON);
         }
@@ -34,7 +34,7 @@ public class CityValidatorImpl implements CityValidator {
         this.baseValidation(requestJson);
     }
 
-    private void baseValidation(@NonNull final CityRequestJson requestJson) throws InvalidPayloadException {
+    private void baseValidation(@NonNull final CityRequestPojo requestJson) throws InvalidPayloadException {
         if (requestJson.getName() == null) {
             throw new InvalidPayloadException(ValidationMessages.INVALID_REQUEST_JSON);
         } else if (requestJson.getName().equals("")) {

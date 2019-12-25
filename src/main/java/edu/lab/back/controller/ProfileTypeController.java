@@ -5,6 +5,7 @@ import edu.lab.back.service.crud.ProfileTypeCrudService;
 import edu.lab.back.util.UrlPatterns;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,11 +20,16 @@ public class ProfileTypeController {
     @NonNull
     private final ProfileTypeCrudService profileTypeCrudService;
 
-    @RequestMapping(value = "/{id}")
+    @RequestMapping(
+        value = "/{id}",
+        produces = {
+            MediaType.APPLICATION_XML_VALUE,
+            MediaType.APPLICATION_JSON_VALUE
+        }
+    )
     public ProfileTypeJson getById(
         @PathVariable(value = "id") final Integer id
-    )
-    {
+    ) {
         final ProfileTypeJson profileType = this.profileTypeCrudService.getById(id);
 
         return profileType;

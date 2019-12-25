@@ -1,8 +1,8 @@
 package edu.lab.back.service.crud;
 
-import edu.lab.back.json.request.CityRequestJson;
-import edu.lab.back.json.response.CityResponseJson;
+import edu.lab.back.json.request.CityRequestPojo;
+import edu.lab.back.json.response.CityResponsePojo;
 
-public interface CityCrudService extends BaseCrudService<CityRequestJson, CityResponseJson, Long> {
+public interface CityCrudService extends BaseCrudService<CityRequestPojo, CityResponsePojo, Long> {
 
 }

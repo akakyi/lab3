@@ -2,8 +2,8 @@ package edu.lab.back.service.crud.implementations;
 
 import edu.lab.back.db.entity.CityEntity;
 import edu.lab.back.db.repositories.CityRepository;
-import edu.lab.back.json.request.CityRequestJson;
-import edu.lab.back.json.response.CityResponseJson;
+import edu.lab.back.json.request.CityRequestPojo;
+import edu.lab.back.json.response.CityResponsePojo;
 import edu.lab.back.service.crud.CityCrudService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -28,50 +28,50 @@ public class CityCrudServiceImpl extends BaseCrudService<CityEntity, Long> imple
     }
 
     @Override
-    public CityResponseJson getById(@NonNull final Long id) {
+    public CityResponsePojo getById(@NonNull final Long id) {
         final CityEntity city = this.getEntityById(id);
-        final CityResponseJson cityResponseJson = CityResponseJson.convert(city);
+        final CityResponsePojo cityResponsePojo = CityResponsePojo.convert(city);
 
-        return cityResponseJson;
+        return cityResponsePojo;
     }
 
     @Override
-    public List<CityResponseJson> getAll() {
+    public List<CityResponsePojo> getAll() {
         final Iterable<CityEntity> allCities = this.getAllEntityes();
-        final List<CityResponseJson> allCitiesJson = StreamSupport.stream(allCities.spliterator(), false)
-            .map(CityResponseJson::convert)
+        final List<CityResponsePojo> allCitiesJson = StreamSupport.stream(allCities.spliterator(), false)
+            .map(CityResponsePojo::convert)
             .collect(Collectors.toList());
 
         return allCitiesJson;
     }
 
     @Override
-    public CityResponseJson deleteById(@NonNull final Long idString) {
+    public CityResponsePojo deleteById(@NonNull final Long idString) {
         final CityEntity city = this.deleteEntityById(idString);
-        final CityResponseJson deletedJson = CityResponseJson.convert(city);
+        final CityResponsePojo deletedJson = CityResponsePojo.convert(city);
 
         return deletedJson;
     }
 
     @Override
-    public CityResponseJson save(@NonNull final CityRequestJson cityJson) {
+    public CityResponsePojo save(@NonNull final CityRequestPojo cityJson) {
         final CityEntity cityEntity = CityEntity.convert(cityJson);
 
         final CityEntity saved = this.cityRepository.save(cityEntity);
-        final CityResponseJson result = CityResponseJson.convert(saved);
+        final CityResponsePojo result = CityResponsePojo.convert(saved);
 
         return result;
     }
 
     @Override
-    public CityResponseJson update(@NonNull final CityRequestJson cityJson) {
+    public CityResponsePojo update(@NonNull final CityRequestPojo cityJson) {
         final Long cityId = cityJson.getId();
         final CityEntity entity = this.getEntityById(cityId);
 
         entity.setName(cityJson.getName());
 
         final CityEntity added = this.cityRepository.save(entity);
-        final CityResponseJson result = CityResponseJson.convert(added);
+        final CityResponsePojo result = CityResponsePojo.convert(added);
 
         return result;
     }

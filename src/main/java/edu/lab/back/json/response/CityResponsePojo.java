@@ -1,6 +1,7 @@
 package edu.lab.back.json.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import edu.lab.back.db.entity.CityEntity;
 import edu.lab.back.db.entity.SchoolEntity;
 import edu.lab.back.json.JsonPojo;
@@ -12,7 +13,8 @@ import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
-public class CityResponseJson implements JsonPojo {
+@JacksonXmlRootElement(localName = "city")
+public class CityResponsePojo implements JsonPojo {
 
     @JsonProperty(value = "id")
     private Long id;
@@ -27,14 +29,14 @@ public class CityResponseJson implements JsonPojo {
     private List<Long> schoolsIds;
 
 
-    public static CityResponseJson convert(final CityEntity cityEntity) {
+    public static CityResponsePojo convert(final CityEntity cityEntity) {
         if (cityEntity == null) {
             return null;
         }
 
-        final CityResponseJson cityResponseJson = new CityResponseJson();
-        cityResponseJson.setId(cityEntity.getId());
-        cityResponseJson.setName(cityEntity.getName());
+        final CityResponsePojo cityResponsePojo = new CityResponsePojo();
+        cityResponsePojo.setId(cityEntity.getId());
+        cityResponsePojo.setName(cityEntity.getName());
 
         if (cityEntity.getSchools() != null) {
             final List<Long> schoolsIds = cityEntity.getSchools()
@@ -42,10 +44,10 @@ public class CityResponseJson implements JsonPojo {
                 .map(SchoolEntity::getId)
                 .collect(Collectors.toList());
 
-            cityResponseJson.setSchoolsIds(schoolsIds);
+            cityResponsePojo.setSchoolsIds(schoolsIds);
         }
 
-        return cityResponseJson;
+        return cityResponsePojo;
     }
 
 }

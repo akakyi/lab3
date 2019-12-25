@@ -8,6 +8,7 @@ import edu.lab.back.util.UrlPatterns;
 import edu.lab.back.util.exception.InvalidPayloadException;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,52 +34,87 @@ public class ProfileController {
     public ProfileController(
         @NonNull final ProfileService profileService,
         @NonNull final ProfileValidator profileValidator
-    )
-    {
+    ) {
         this.profileService = profileService;
         this.profileValidator = profileValidator;
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    protected ProfileResponseJson getProfile(
+    @RequestMapping(
+        value = "/{id}",
+        method = RequestMethod.GET,
+        produces = {
+            MediaType.APPLICATION_XML_VALUE,
+            MediaType.APPLICATION_JSON_VALUE
+        }
+    )
+    public ProfileResponseJson getProfile(
         @PathVariable("id") Long id
-    ) throws InvalidPayloadException
-    {
+    ) throws InvalidPayloadException {
         final ProfileResponseJson profile = this.profileService.getById(id);
 
         return profile;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    protected List<ProfileResponseJson> getAllProfiles()
-    {
+    @RequestMapping(
+        method = RequestMethod.GET,
+        produces = {
+            MediaType.APPLICATION_XML_VALUE,
+            MediaType.APPLICATION_JSON_VALUE
+        }
+    )
+    public List<ProfileResponseJson> getAllProfiles() {
         final List<ProfileResponseJson> profiles = this.profileService.getAll();
 
         return profiles;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    protected ProfileResponseJson save(@RequestBody ProfileRequestJson profileJson) throws InvalidPayloadException
-    {
-            this.profileValidator.validateSave(profileJson);
-            final ProfileResponseJson saved = this.profileService.save(profileJson);
+    @RequestMapping(
+        method = RequestMethod.POST,
+        produces = {
+            MediaType.APPLICATION_XML_VALUE,
+            MediaType.APPLICATION_JSON_VALUE
+        },
+        consumes = {
+            MediaType.APPLICATION_XML_VALUE,
+            MediaType.APPLICATION_JSON_VALUE
+        }
+    )
+    public ProfileResponseJson save(@RequestBody ProfileRequestJson profileJson) throws InvalidPayloadException {
+        this.profileValidator.validateSave(profileJson);
+        final ProfileResponseJson saved = this.profileService.save(profileJson);
 
-            return saved;
+        return saved;
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
-    protected ProfileResponseJson update(@RequestBody ProfileRequestJson profileJson) throws InvalidPayloadException {
-            this.profileValidator.validateUpdate(profileJson);
-            final ProfileResponseJson updated = this.profileService.update(profileJson);
+    @RequestMapping(
+        method = RequestMethod.PUT,
+        produces = {
+            MediaType.APPLICATION_XML_VALUE,
+            MediaType.APPLICATION_JSON_VALUE
+        },
+        consumes = {
+            MediaType.APPLICATION_XML_VALUE,
+            MediaType.APPLICATION_JSON_VALUE
+        }
+    )
+    public ProfileResponseJson update(@RequestBody ProfileRequestJson profileJson) throws InvalidPayloadException {
+        this.profileValidator.validateUpdate(profileJson);
+        final ProfileResponseJson updated = this.profileService.update(profileJson);
 
-            return updated;
+        return updated;
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    protected ProfileResponseJson delete(@PathVariable("id") Long id) throws InvalidPayloadException
-    {
-            final ProfileResponseJson deleted = this.profileService.deleteById(id);
+    @RequestMapping(
+        value = "/{id}",
+        method = RequestMethod.DELETE,
+        produces = {
+            MediaType.APPLICATION_XML_VALUE,
+            MediaType.APPLICATION_JSON_VALUE
+        }
+    )
+    public ProfileResponseJson delete(@PathVariable("id") Long id) throws InvalidPayloadException {
+        final ProfileResponseJson deleted = this.profileService.deleteById(id);
 
-            return deleted;
+        return deleted;
     }
 }

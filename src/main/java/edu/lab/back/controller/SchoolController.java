@@ -8,6 +8,7 @@ import edu.lab.back.util.UrlPatterns;
 import edu.lab.back.util.exception.InvalidPayloadException;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,46 +29,76 @@ public class SchoolController {
     public SchoolController(
         @NonNull final SchoolService schoolService,
         @NonNull final SchoolValidator validator
-    )
-    {
+    ) {
         this.schoolService = schoolService;
         this.validator = validator;
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    protected SchoolResponseJson getSchool (
+    @RequestMapping(
+        value = "/{id}",
+        method = RequestMethod.GET,
+        produces = {
+            MediaType.APPLICATION_XML_VALUE,
+            MediaType.APPLICATION_JSON_VALUE
+        }
+    )
+    protected SchoolResponseJson getSchool(
         @PathVariable("id") Long id
-    ) throws InvalidPayloadException
-    {
+    ) throws InvalidPayloadException {
         final SchoolResponseJson school = this.schoolService.getById(id);
 
         return school;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(
+        method = RequestMethod.POST,
+        produces = {
+            MediaType.APPLICATION_XML_VALUE,
+            MediaType.APPLICATION_JSON_VALUE
+        },
+        consumes = {
+            MediaType.APPLICATION_XML_VALUE,
+            MediaType.APPLICATION_JSON_VALUE
+        }
+    )
     protected SchoolResponseJson save(@RequestBody SchoolRequestJson schoolRequestJson) throws InvalidPayloadException {
-            this.validator.validateSave(schoolRequestJson);
-            final SchoolResponseJson saved = this.schoolService.save(schoolRequestJson);
+        this.validator.validateSave(schoolRequestJson);
+        final SchoolResponseJson saved = this.schoolService.save(schoolRequestJson);
 
-            return saved;
+        return saved;
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
+    @RequestMapping(
+        method = RequestMethod.PUT,
+        produces = {
+            MediaType.APPLICATION_XML_VALUE,
+            MediaType.APPLICATION_JSON_VALUE
+        },
+        consumes = {
+            MediaType.APPLICATION_XML_VALUE,
+            MediaType.APPLICATION_JSON_VALUE
+        }
+    )
     protected SchoolResponseJson update(
         @RequestBody SchoolRequestJson schoolRequestJson
-    ) throws InvalidPayloadException
-    {
-            this.validator.validateUpdate(schoolRequestJson);
-            final SchoolResponseJson updated = this.schoolService.update(schoolRequestJson);
+    ) throws InvalidPayloadException {
+        this.validator.validateUpdate(schoolRequestJson);
+        final SchoolResponseJson updated = this.schoolService.update(schoolRequestJson);
 
-            return updated;
+        return updated;
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    protected SchoolResponseJson delete(@PathVariable("id") Long id)
-    {
-            final SchoolResponseJson deleted = this.schoolService.deleteById(id);
+    @RequestMapping(
+        value = "/{id}",
+        method = RequestMethod.DELETE,
+        produces = {
+            MediaType.APPLICATION_XML_VALUE,
+            MediaType.APPLICATION_JSON_VALUE
+        }
+    )
+    protected SchoolResponseJson delete(@PathVariable("id") Long id) {
+        final SchoolResponseJson deleted = this.schoolService.deleteById(id);
 
-            return deleted;
+        return deleted;
     }
 }

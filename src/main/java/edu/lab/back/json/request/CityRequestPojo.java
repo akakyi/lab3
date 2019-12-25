@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class CityRequestJson implements JsonPojo {
+public class CityRequestPojo implements JsonPojo {
 
     @JsonProperty(value = "id")
     private Long id;
@@ -16,12 +16,12 @@ public class CityRequestJson implements JsonPojo {
     @JsonProperty(value = "name")
     private String name;
 
-    public static CityRequestJson convert(final CityEntity cityEntity) {
+    public static CityRequestPojo convert(final CityEntity cityEntity) {
         if (cityEntity == null) {
             return null;
         }
 
-        final CityRequestJson cityJson = new CityRequestJson();
+        final CityRequestPojo cityJson = new CityRequestPojo();
         cityJson.setId(cityEntity.getId());
         cityJson.setName(cityEntity.getName());
 
