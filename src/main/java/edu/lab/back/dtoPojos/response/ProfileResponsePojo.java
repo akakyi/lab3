@@ -1,16 +1,16 @@
-package edu.lab.back.json.response;
+package edu.lab.back.dtoPojos.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import edu.lab.back.db.entity.ProfileEntity;
 import edu.lab.back.db.entity.ProfileTypeEntity;
-import edu.lab.back.json.JsonPojo;
+import edu.lab.back.dtoPojos.DtoPojo;
 import edu.lab.back.util.ProfileTypeEnum;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class ProfileResponseJson implements JsonPojo {
+public class ProfileResponsePojo implements DtoPojo {
 
     @JsonProperty(value = "id")
     private Long id;
@@ -27,12 +27,12 @@ public class ProfileResponseJson implements JsonPojo {
     @JsonProperty(value = "class_level")
     private String classLevel;
 
-    public static ProfileResponseJson convert(final ProfileEntity profileEntity) {
+    public static ProfileResponsePojo convert(final ProfileEntity profileEntity) {
         if (profileEntity == null) {
             return null;
         }
 
-        final ProfileResponseJson result = new ProfileResponseJson();
+        final ProfileResponsePojo result = new ProfileResponsePojo();
         result.setAge(profileEntity.getAge());
         result.setClassLevel(profileEntity.getClassLevel());
         result.setId(profileEntity.getId());

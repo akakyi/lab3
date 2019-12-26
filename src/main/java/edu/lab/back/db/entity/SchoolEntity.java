@@ -40,7 +40,7 @@ public class SchoolEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
     private List<ProfileEntity> profiles;
 
-//    public SchoolEntity conveert(@NonNull final SchoolRequestJson requestJson) {
+//    public SchoolEntity conveert(@NonNull final SchoolRequestPojo requestJson) {
 //        final SchoolEntity entity = new SchoolEntity();
 //        entity.setId(requestJson.getId());
 //        entity.setName(requestJson.getName());

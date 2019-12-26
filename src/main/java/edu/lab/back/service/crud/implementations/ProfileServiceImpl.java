@@ -5,8 +5,8 @@ import edu.lab.back.db.entity.ProfileTypeEntity;
 import edu.lab.back.db.entity.SchoolEntity;
 import edu.lab.back.db.repositories.ProfileRepository;
 import edu.lab.back.db.repositories.ProfileTypeRepository;
-import edu.lab.back.json.request.ProfileRequestJson;
-import edu.lab.back.json.response.ProfileResponseJson;
+import edu.lab.back.dtoPojos.request.ProfileRequestPojo;
+import edu.lab.back.dtoPojos.response.ProfileResponsePojo;
 import edu.lab.back.service.crud.ProfileService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -33,18 +33,18 @@ public class ProfileServiceImpl extends BaseCrudService<ProfileEntity, Long> imp
     }
 
     @Override
-    public ProfileResponseJson getById(@NonNull final Long id) {
+    public ProfileResponsePojo getById(@NonNull final Long id) {
         final ProfileEntity profile = this.getEntityById(id);
 
-        final ProfileResponseJson converted = ProfileResponseJson.convert(profile);
+        final ProfileResponsePojo converted = ProfileResponsePojo.convert(profile);
         return converted;
     }
 
     @Override
-    public List<ProfileResponseJson> getAll() {
+    public List<ProfileResponsePojo> getAll() {
         final Iterable<ProfileEntity> allProfiles = this.getAllEntityes();
-        final List<ProfileResponseJson> result = StreamSupport.stream(allProfiles.spliterator(), false)
-            .map(ProfileResponseJson::convert)
+        final List<ProfileResponsePojo> result = StreamSupport.stream(allProfiles.spliterator(), false)
+            .map(ProfileResponsePojo::convert)
             .collect(Collectors.toList());
 
         if (result.isEmpty()) {
@@ -54,45 +54,45 @@ public class ProfileServiceImpl extends BaseCrudService<ProfileEntity, Long> imp
     }
 
     @Override
-    public ProfileResponseJson deleteById(@NonNull final Long id) {
+    public ProfileResponsePojo deleteById(@NonNull final Long id) {
         final ProfileEntity deletedEntity = this.deleteEntityById(id);
 
-        final ProfileResponseJson result = ProfileResponseJson.convert(deletedEntity);
+        final ProfileResponsePojo result = ProfileResponsePojo.convert(deletedEntity);
         return result;
     }
 
     @Override
-    public ProfileResponseJson save(@NonNull final ProfileRequestJson profileJson) {
+    public ProfileResponsePojo save(@NonNull final ProfileRequestPojo profileJson) {
         final ProfileEntity entity = new ProfileEntity();
         this.fillEntity(entity, profileJson);
 
         final ProfileEntity saved = this.profileRepository.save(entity);
-        final ProfileResponseJson savedJson = ProfileResponseJson.convert(saved);
+        final ProfileResponsePojo savedJson = ProfileResponsePojo.convert(saved);
         return savedJson;
     }
 
     @Override
-    public ProfileResponseJson update(@NonNull final ProfileRequestJson profileJson) {
+    public ProfileResponsePojo update(@NonNull final ProfileRequestPojo profileJson) {
         final ProfileEntity entity = this.getEntityById(profileJson.getId());
         this.fillEntity(entity, profileJson);
 
         final ProfileEntity saved = this.profileRepository.save(entity);
-        final ProfileResponseJson savedJson = ProfileResponseJson.convert(saved);
+        final ProfileResponsePojo savedJson = ProfileResponsePojo.convert(saved);
         return savedJson;
     }
 
     @Override
-    public List<ProfileResponseJson> getProfileBySchoolId(final Long id) {
+    public List<ProfileResponsePojo> getProfileBySchoolId(final Long id) {
         final List<ProfileEntity> profilesBySchoolEntities = this.profileRepository.getProfilesBySchoolId(id);
 
-        final List<ProfileResponseJson> result = profilesBySchoolEntities.stream()
-            .map(ProfileResponseJson::convert)
+        final List<ProfileResponsePojo> result = profilesBySchoolEntities.stream()
+            .map(ProfileResponsePojo::convert)
             .collect(Collectors.toList());
 
         return result;
     }
 
-    private void fillEntity(@NonNull final ProfileEntity entity, @NonNull final ProfileRequestJson profileJson) {
+    private void fillEntity(@NonNull final ProfileEntity entity, @NonNull final ProfileRequestPojo profileJson) {
         entity.setName(profileJson.getName());
         entity.setClassLevel(profileJson.getClassLevel());
         entity.setAge(profileJson.getAge());

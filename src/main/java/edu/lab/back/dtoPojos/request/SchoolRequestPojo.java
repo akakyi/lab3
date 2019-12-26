@@ -1,14 +1,14 @@
-package edu.lab.back.json.request;
+package edu.lab.back.dtoPojos.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import edu.lab.back.db.entity.SchoolEntity;
-import edu.lab.back.json.JsonPojo;
+import edu.lab.back.dtoPojos.DtoPojo;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class SchoolRequestJson implements JsonPojo {
+public class SchoolRequestPojo implements DtoPojo {
 
     @JsonProperty(value = "id")
     private Long id;
@@ -19,12 +19,12 @@ public class SchoolRequestJson implements JsonPojo {
     @JsonProperty(value = "city_id")
     private Long cityId;
 
-    public static SchoolRequestJson convert(final SchoolEntity schoolEntity) {
+    public static SchoolRequestPojo convert(final SchoolEntity schoolEntity) {
         if (schoolEntity == null) {
             return null;
         }
 
-        SchoolRequestJson result = new SchoolRequestJson();
+        SchoolRequestPojo result = new SchoolRequestPojo();
         result.setId(schoolEntity.getId());
         result.setName(schoolEntity.getName());
 

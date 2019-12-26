@@ -1,6 +1,6 @@
 package edu.lab.back.controller;
 
-import edu.lab.back.json.ProfileTypeJson;
+import edu.lab.back.dtoPojos.ProfileTypePojo;
 import edu.lab.back.service.crud.ProfileTypeCrudService;
 import edu.lab.back.util.UrlPatterns;
 import lombok.NonNull;
@@ -27,10 +27,10 @@ public class ProfileTypeController {
             MediaType.APPLICATION_JSON_VALUE
         }
     )
-    public ProfileTypeJson getById(
+    public ProfileTypePojo getById(
         @PathVariable(value = "id") final Integer id
     ) {
-        final ProfileTypeJson profileType = this.profileTypeCrudService.getById(id);
+        final ProfileTypePojo profileType = this.profileTypeCrudService.getById(id);
 
         return profileType;
     }

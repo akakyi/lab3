@@ -2,7 +2,7 @@ package edu.lab.back.service.crud.implementations;
 
 import edu.lab.back.db.entity.ProfileTypeEntity;
 import edu.lab.back.db.repositories.ProfileTypeRepository;
-import edu.lab.back.json.ProfileTypeJson;
+import edu.lab.back.dtoPojos.ProfileTypePojo;
 import edu.lab.back.service.crud.ProfileTypeCrudService;
 import edu.lab.back.util.exception.ResourceNotFoundException;
 import lombok.NonNull;
@@ -30,48 +30,48 @@ public class ProfileTypeCrudServiceImpl
     }
 
     @Override
-    public ProfileTypeJson getById(final Integer id) throws ResourceNotFoundException {
+    public ProfileTypePojo getById(final Integer id) throws ResourceNotFoundException {
         final ProfileTypeEntity entity = this.getEntityById(id);
-        final ProfileTypeJson result = ProfileTypeJson.convert(entity);
+        final ProfileTypePojo result = ProfileTypePojo.convert(entity);
 
         return result;
     }
 
     @Override
-    public List<ProfileTypeJson> getAll() {
+    public List<ProfileTypePojo> getAll() {
         final Iterable<ProfileTypeEntity> allEntityes = this.getAllEntityes();
-        final List<ProfileTypeJson> result = StreamSupport.stream(allEntityes.spliterator(), false)
-            .map(ProfileTypeJson::convert)
+        final List<ProfileTypePojo> result = StreamSupport.stream(allEntityes.spliterator(), false)
+            .map(ProfileTypePojo::convert)
             .collect(Collectors.toList());
 
         return result;
     }
 
     @Override
-    public ProfileTypeJson deleteById(final Integer id) throws ResourceNotFoundException {
+    public ProfileTypePojo deleteById(final Integer id) throws ResourceNotFoundException {
         final ProfileTypeEntity deleted = this.deleteEntityById(id);
-        final ProfileTypeJson result = ProfileTypeJson.convert(deleted);
+        final ProfileTypePojo result = ProfileTypePojo.convert(deleted);
 
         return result;
     }
 
     @Override
-    public ProfileTypeJson save(final ProfileTypeJson typeJson) {
+    public ProfileTypePojo save(final ProfileTypePojo typeJson) {
         final ProfileTypeEntity converted = ProfileTypeEntity.convert(typeJson);
         final ProfileTypeEntity saved = this.repository.save(converted);
-        final ProfileTypeJson result = ProfileTypeJson.convert(saved);
+        final ProfileTypePojo result = ProfileTypePojo.convert(saved);
 
         return result;
     }
 
     @Override
-    public ProfileTypeJson update(final ProfileTypeJson cityJson) {
+    public ProfileTypePojo update(final ProfileTypePojo cityJson) {
         final Integer id = cityJson.getId();
         final ProfileTypeEntity entity = this.getEntityById(id);
 
         entity.setName(cityJson.getName());
         final ProfileTypeEntity updated = this.repository.save(entity);
-        final ProfileTypeJson result = ProfileTypeJson.convert(updated);
+        final ProfileTypePojo result = ProfileTypePojo.convert(updated);
 
         return result;
     }

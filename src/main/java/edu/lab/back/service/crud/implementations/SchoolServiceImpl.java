@@ -3,8 +3,8 @@ package edu.lab.back.service.crud.implementations;
 import edu.lab.back.db.entity.CityEntity;
 import edu.lab.back.db.entity.SchoolEntity;
 import edu.lab.back.db.repositories.SchoolRepository;
-import edu.lab.back.json.request.SchoolRequestJson;
-import edu.lab.back.json.response.SchoolResponseJson;
+import edu.lab.back.dtoPojos.request.SchoolRequestPojo;
+import edu.lab.back.dtoPojos.response.SchoolResponsePojo;
 import edu.lab.back.service.crud.SchoolService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -27,32 +27,32 @@ public class SchoolServiceImpl extends BaseCrudService<SchoolEntity, Long> imple
     }
 
     @Override
-    public SchoolResponseJson getById(final Long id) {
+    public SchoolResponsePojo getById(final Long id) {
         final SchoolEntity school = this.getEntityById(id);
-        final SchoolResponseJson converted = SchoolResponseJson.convert(school);
+        final SchoolResponsePojo converted = SchoolResponsePojo.convert(school);
         return converted;
     }
 
     @Override
-    public List<SchoolResponseJson> getAll() {
+    public List<SchoolResponsePojo> getAll() {
         final Iterable<SchoolEntity> allSchools = this.getAllEntityes();
-        final List<SchoolResponseJson> result = StreamSupport.stream(allSchools.spliterator(), false)
-            .map(SchoolResponseJson::convert)
+        final List<SchoolResponsePojo> result = StreamSupport.stream(allSchools.spliterator(), false)
+            .map(SchoolResponsePojo::convert)
             .collect(Collectors.toList());
 
         return result;
     }
 
     @Override
-    public SchoolResponseJson deleteById(@NonNull final Long id) {
+    public SchoolResponsePojo deleteById(@NonNull final Long id) {
         final SchoolEntity deletedEntity = this.deleteEntityById(id);
 
-        final SchoolResponseJson result = SchoolResponseJson.convert(deletedEntity);
+        final SchoolResponsePojo result = SchoolResponsePojo.convert(deletedEntity);
         return result;
     }
 
     @Override
-    public SchoolResponseJson save(@NonNull final SchoolRequestJson schoolRequestJson) {
+    public SchoolResponsePojo save(@NonNull final SchoolRequestPojo schoolRequestJson) {
         final SchoolEntity entity = new SchoolEntity();
         entity.setId(schoolRequestJson.getId());
         entity.setName(schoolRequestJson.getName());
@@ -63,12 +63,12 @@ public class SchoolServiceImpl extends BaseCrudService<SchoolEntity, Long> imple
         entity.setCity(city);
 
         final SchoolEntity saved = this.schoolRepository.save(entity);
-        final SchoolResponseJson savedJson = SchoolResponseJson.convert(saved);
+        final SchoolResponsePojo savedJson = SchoolResponsePojo.convert(saved);
         return savedJson;
     }
 
     @Override
-    public SchoolResponseJson update(@NonNull final SchoolRequestJson schoolJson) {
+    public SchoolResponsePojo update(@NonNull final SchoolRequestPojo schoolJson) {
         final Long schoolId = schoolJson.getId();
         final SchoolEntity school = this.getEntityById(schoolId);
 
@@ -79,15 +79,15 @@ public class SchoolServiceImpl extends BaseCrudService<SchoolEntity, Long> imple
         school.setName(schoolJson.getName());
 
         final SchoolEntity updated = this.schoolRepository.save(school);
-        final SchoolResponseJson updatedJson = SchoolResponseJson.convert(updated);
+        final SchoolResponsePojo updatedJson = SchoolResponsePojo.convert(updated);
         return updatedJson;
     }
 
     @Override
-    public List<SchoolResponseJson> getSchoolsByCityId(@NonNull final Long cityId) {
+    public List<SchoolResponsePojo> getSchoolsByCityId(@NonNull final Long cityId) {
         final List<SchoolEntity> schoolsByCityId = this.schoolRepository.getSchoolsByCityId(cityId);
-        final List<SchoolResponseJson> result = schoolsByCityId.stream()
-            .map(SchoolResponseJson::convert)
+        final List<SchoolResponsePojo> result = schoolsByCityId.stream()
+            .map(SchoolResponsePojo::convert)
             .collect(Collectors.toList());
 
         return result;

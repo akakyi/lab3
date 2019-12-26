@@ -1,7 +1,7 @@
 package edu.lab.back.controller;
 
-import edu.lab.back.json.request.ProfileRequestJson;
-import edu.lab.back.json.response.ProfileResponseJson;
+import edu.lab.back.dtoPojos.request.ProfileRequestPojo;
+import edu.lab.back.dtoPojos.response.ProfileResponsePojo;
 import edu.lab.back.service.crud.ProfileService;
 import edu.lab.back.service.validator.ProfileValidator;
 import edu.lab.back.util.UrlPatterns;
@@ -47,10 +47,10 @@ public class ProfileController {
             MediaType.APPLICATION_JSON_VALUE
         }
     )
-    public ProfileResponseJson getProfile(
+    public ProfileResponsePojo getProfile(
         @PathVariable("id") Long id
     ) throws InvalidPayloadException {
-        final ProfileResponseJson profile = this.profileService.getById(id);
+        final ProfileResponsePojo profile = this.profileService.getById(id);
 
         return profile;
     }
@@ -62,8 +62,8 @@ public class ProfileController {
             MediaType.APPLICATION_JSON_VALUE
         }
     )
-    public List<ProfileResponseJson> getAllProfiles() {
-        final List<ProfileResponseJson> profiles = this.profileService.getAll();
+    public List<ProfileResponsePojo> getAllProfiles() {
+        final List<ProfileResponsePojo> profiles = this.profileService.getAll();
 
         return profiles;
     }
@@ -79,9 +79,9 @@ public class ProfileController {
             MediaType.APPLICATION_JSON_VALUE
         }
     )
-    public ProfileResponseJson save(@RequestBody ProfileRequestJson profileJson) throws InvalidPayloadException {
+    public ProfileResponsePojo save(@RequestBody ProfileRequestPojo profileJson) throws InvalidPayloadException {
         this.profileValidator.validateSave(profileJson);
-        final ProfileResponseJson saved = this.profileService.save(profileJson);
+        final ProfileResponsePojo saved = this.profileService.save(profileJson);
 
         return saved;
     }
@@ -97,9 +97,9 @@ public class ProfileController {
             MediaType.APPLICATION_JSON_VALUE
         }
     )
-    public ProfileResponseJson update(@RequestBody ProfileRequestJson profileJson) throws InvalidPayloadException {
+    public ProfileResponsePojo update(@RequestBody ProfileRequestPojo profileJson) throws InvalidPayloadException {
         this.profileValidator.validateUpdate(profileJson);
-        final ProfileResponseJson updated = this.profileService.update(profileJson);
+        final ProfileResponsePojo updated = this.profileService.update(profileJson);
 
         return updated;
     }
@@ -112,8 +112,8 @@ public class ProfileController {
             MediaType.APPLICATION_JSON_VALUE
         }
     )
-    public ProfileResponseJson delete(@PathVariable("id") Long id) throws InvalidPayloadException {
-        final ProfileResponseJson deleted = this.profileService.deleteById(id);
+    public ProfileResponsePojo delete(@PathVariable("id") Long id) throws InvalidPayloadException {
+        final ProfileResponsePojo deleted = this.profileService.deleteById(id);
 
         return deleted;
     }

@@ -1,7 +1,7 @@
 package edu.lab.back.controller;
 
-import edu.lab.back.json.request.CityRequestPojo;
-import edu.lab.back.json.response.CityResponsePojo;
+import edu.lab.back.dtoPojos.request.CityRequestPojo;
+import edu.lab.back.dtoPojos.response.CityResponsePojo;
 import edu.lab.back.service.crud.CityCrudService;
 import edu.lab.back.service.validator.CityValidator;
 import edu.lab.back.util.UrlPatterns;

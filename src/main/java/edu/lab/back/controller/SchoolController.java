@@ -1,7 +1,7 @@
 package edu.lab.back.controller;
 
-import edu.lab.back.json.request.SchoolRequestJson;
-import edu.lab.back.json.response.SchoolResponseJson;
+import edu.lab.back.dtoPojos.request.SchoolRequestPojo;
+import edu.lab.back.dtoPojos.response.SchoolResponsePojo;
 import edu.lab.back.service.crud.SchoolService;
 import edu.lab.back.service.validator.SchoolValidator;
 import edu.lab.back.util.UrlPatterns;
@@ -42,10 +42,10 @@ public class SchoolController {
             MediaType.APPLICATION_JSON_VALUE
         }
     )
-    protected SchoolResponseJson getSchool(
+    protected SchoolResponsePojo getSchool(
         @PathVariable("id") Long id
     ) throws InvalidPayloadException {
-        final SchoolResponseJson school = this.schoolService.getById(id);
+        final SchoolResponsePojo school = this.schoolService.getById(id);
 
         return school;
     }
@@ -61,9 +61,9 @@ public class SchoolController {
             MediaType.APPLICATION_JSON_VALUE
         }
     )
-    protected SchoolResponseJson save(@RequestBody SchoolRequestJson schoolRequestJson) throws InvalidPayloadException {
+    protected SchoolResponsePojo save(@RequestBody SchoolRequestPojo schoolRequestJson) throws InvalidPayloadException {
         this.validator.validateSave(schoolRequestJson);
-        final SchoolResponseJson saved = this.schoolService.save(schoolRequestJson);
+        final SchoolResponsePojo saved = this.schoolService.save(schoolRequestJson);
 
         return saved;
     }
@@ -79,11 +79,11 @@ public class SchoolController {
             MediaType.APPLICATION_JSON_VALUE
         }
     )
-    protected SchoolResponseJson update(
-        @RequestBody SchoolRequestJson schoolRequestJson
+    protected SchoolResponsePojo update(
+        @RequestBody SchoolRequestPojo schoolRequestJson
     ) throws InvalidPayloadException {
         this.validator.validateUpdate(schoolRequestJson);
-        final SchoolResponseJson updated = this.schoolService.update(schoolRequestJson);
+        final SchoolResponsePojo updated = this.schoolService.update(schoolRequestJson);
 
         return updated;
     }
@@ -96,8 +96,8 @@ public class SchoolController {
             MediaType.APPLICATION_JSON_VALUE
         }
     )
-    protected SchoolResponseJson delete(@PathVariable("id") Long id) {
-        final SchoolResponseJson deleted = this.schoolService.deleteById(id);
+    protected SchoolResponsePojo delete(@PathVariable("id") Long id) {
+        final SchoolResponsePojo deleted = this.schoolService.deleteById(id);
 
         return deleted;
     }

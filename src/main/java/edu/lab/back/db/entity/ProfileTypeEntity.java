@@ -1,6 +1,6 @@
 package edu.lab.back.db.entity;
 
-import edu.lab.back.json.ProfileTypeJson;
+import edu.lab.back.dtoPojos.ProfileTypePojo;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -28,7 +28,7 @@ public class ProfileTypeEntity {
     @Column(name = "name")
     private String name;
 
-    public static ProfileTypeEntity convert(final ProfileTypeJson profileTypeJson) {
+    public static ProfileTypeEntity convert(final ProfileTypePojo profileTypeJson) {
         if (profileTypeJson == null) {
             return null;
         }

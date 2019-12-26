@@ -1,9 +1,9 @@
-package edu.lab.back.json.response;
+package edu.lab.back.dtoPojos.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import edu.lab.back.db.entity.ProfileEntity;
 import edu.lab.back.db.entity.SchoolEntity;
-import edu.lab.back.json.JsonPojo;
+import edu.lab.back.dtoPojos.DtoPojo;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
-public class SchoolResponseJson implements JsonPojo {
+public class SchoolResponsePojo implements DtoPojo {
 
     @JsonProperty(value = "id")
     private Long id;
@@ -22,15 +22,15 @@ public class SchoolResponseJson implements JsonPojo {
 
     //TODO в рамках лабы норм, но лучше бы тут лежали просто айдишники
 //    @JsonProperty(value = "profiles")
-//    private List<ProfileResponseJson> profiles;
+//    private List<ProfileResponsePojo> profiles;
     private List<Long> profilesIds;
 
-    public static SchoolResponseJson convert(final SchoolEntity schoolEntity) {
+    public static SchoolResponsePojo convert(final SchoolEntity schoolEntity) {
         if (schoolEntity == null) {
             return null;
         }
 
-        SchoolResponseJson result = new SchoolResponseJson();
+        SchoolResponsePojo result = new SchoolResponsePojo();
         result.setId(schoolEntity.getId());
         result.setName(schoolEntity.getName());
 

@@ -2,8 +2,8 @@ package edu.lab.back.service.crud.implementations;
 
 import edu.lab.back.db.entity.CityEntity;
 import edu.lab.back.db.repositories.CityRepository;
-import edu.lab.back.json.request.CityRequestPojo;
-import edu.lab.back.json.response.CityResponsePojo;
+import edu.lab.back.dtoPojos.request.CityRequestPojo;
+import edu.lab.back.dtoPojos.response.CityResponsePojo;
 import edu.lab.back.service.crud.CityCrudService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;

@@ -3,7 +3,7 @@ package edu.lab.back.service.validator.implementations;
 import edu.lab.back.db.repositories.ProfileTypeRepository;
 import edu.lab.back.db.repositories.SchoolRepository;
 import edu.lab.back.db.entity.SchoolEntity;
-import edu.lab.back.json.request.ProfileRequestJson;
+import edu.lab.back.dtoPojos.request.ProfileRequestPojo;
 import edu.lab.back.service.validator.ProfileValidator;
 import edu.lab.back.util.ProfileTypeEnum;
 import edu.lab.back.util.ValidationMessages;
@@ -25,7 +25,7 @@ public class ProfileValidatorImpl implements ProfileValidator {
     private final SchoolRepository schoolRepository;
 
     @Override
-    public void validateSave(final ProfileRequestJson requestJson) throws InvalidPayloadException {
+    public void validateSave(final ProfileRequestPojo requestJson) throws InvalidPayloadException {
         if (requestJson == null) {
             throw new InvalidPayloadException(ValidationMessages.INVALID_REQUEST_JSON);
         }
@@ -37,7 +37,7 @@ public class ProfileValidatorImpl implements ProfileValidator {
     }
 
     @Override
-    public void validateUpdate(final ProfileRequestJson requestJson) throws InvalidPayloadException {
+    public void validateUpdate(final ProfileRequestPojo requestJson) throws InvalidPayloadException {
         if (requestJson == null) {
             throw new InvalidPayloadException(ValidationMessages.INVALID_REQUEST_JSON);
         }
@@ -48,7 +48,7 @@ public class ProfileValidatorImpl implements ProfileValidator {
         this.baseValidate(requestJson);
     }
 
-    private void baseValidate(@NonNull final ProfileRequestJson requestJson) throws InvalidPayloadException {
+    private void baseValidate(@NonNull final ProfileRequestPojo requestJson) throws InvalidPayloadException {
         final String name = requestJson.getName();
         if (name == null || name.equals("")) {
             throw new InvalidPayloadException(ValidationMessages.INVALID_REQUEST_JSON);

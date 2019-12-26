@@ -1,6 +1,6 @@
 package edu.lab.back.service.validator;
 
-import edu.lab.back.json.request.CityRequestPojo;
+import edu.lab.back.dtoPojos.request.CityRequestPojo;
 import edu.lab.back.util.exception.InvalidPayloadException;
 
 public interface CityValidator {

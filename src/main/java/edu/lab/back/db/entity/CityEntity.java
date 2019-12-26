@@ -1,7 +1,7 @@
 package edu.lab.back.db.entity;
 
-import edu.lab.back.json.request.CityRequestPojo;
-import edu.lab.back.json.response.CityResponsePojo;
+import edu.lab.back.dtoPojos.request.CityRequestPojo;
+import edu.lab.back.dtoPojos.response.CityResponsePojo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;

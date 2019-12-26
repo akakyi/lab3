@@ -1,9 +1,9 @@
-package edu.lab.back.json;
+package edu.lab.back.dtoPojos;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public interface JsonPojo {
+public interface DtoPojo {
 
     default String toJsonString() throws JsonProcessingException {
         final ObjectMapper mapper = new ObjectMapper();

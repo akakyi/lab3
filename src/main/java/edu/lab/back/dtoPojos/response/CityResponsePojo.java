@@ -1,10 +1,9 @@
-package edu.lab.back.json.response;
+package edu.lab.back.dtoPojos.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import edu.lab.back.db.entity.CityEntity;
 import edu.lab.back.db.entity.SchoolEntity;
-import edu.lab.back.json.JsonPojo;
+import edu.lab.back.dtoPojos.DtoPojo;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,8 +12,8 @@ import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
-@JacksonXmlRootElement(localName = "city")
-public class CityResponsePojo implements JsonPojo {
+//@JacksonXmlRootElement(localName = "city")
+public class CityResponsePojo implements DtoPojo {
 
     @JsonProperty(value = "id")
     private Long id;
@@ -24,7 +23,7 @@ public class CityResponsePojo implements JsonPojo {
 
     //TODO в рамках лабы норм, но лучше бы тут лежали просто айдишники
 //    @JsonProperty(value = "schools")
-//    private List<SchoolResponseJson> schools;
+//    private List<SchoolResponsePojo> schools;
     @JsonProperty(value = "schools_ids")
     private List<Long> schoolsIds;
 

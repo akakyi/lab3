@@ -2,7 +2,7 @@ package edu.lab.back.service.validator.implementations;
 
 import edu.lab.back.db.entity.CityEntity;
 import edu.lab.back.db.repositories.CityRepository;
-import edu.lab.back.json.request.SchoolRequestJson;
+import edu.lab.back.dtoPojos.request.SchoolRequestPojo;
 import edu.lab.back.service.validator.SchoolValidator;
 import edu.lab.back.util.ValidationMessages;
 import edu.lab.back.util.exception.InvalidPayloadException;
@@ -20,7 +20,7 @@ public class SchoolValidatorImpl implements SchoolValidator {
     private final CityRepository cityRepository;
 
     @Override
-    public void validateSave(final SchoolRequestJson requestJson) throws InvalidPayloadException {
+    public void validateSave(final SchoolRequestPojo requestJson) throws InvalidPayloadException {
         if (requestJson == null) {
             throw new InvalidPayloadException(ValidationMessages.INVALID_REQUEST_JSON);
         }
@@ -32,7 +32,7 @@ public class SchoolValidatorImpl implements SchoolValidator {
     }
 
     @Override
-    public void validateUpdate(final SchoolRequestJson requestJson) throws InvalidPayloadException {
+    public void validateUpdate(final SchoolRequestPojo requestJson) throws InvalidPayloadException {
         if (requestJson == null) {
             throw new InvalidPayloadException(ValidationMessages.INVALID_REQUEST_JSON);
         }
@@ -43,7 +43,7 @@ public class SchoolValidatorImpl implements SchoolValidator {
         this.baseValidate(requestJson);
     }
 
-    private void baseValidate(@NonNull final SchoolRequestJson requestJson) throws InvalidPayloadException {
+    private void baseValidate(@NonNull final SchoolRequestPojo requestJson) throws InvalidPayloadException {
         final Long cityId = requestJson.getCityId();
         if (cityId == null) {
             throw new InvalidPayloadException(ValidationMessages.INVALID_REQUEST_JSON);

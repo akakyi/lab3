@@ -1,6 +1,6 @@
 package edu.lab.back.service.validator.implementations;
 
-import edu.lab.back.json.request.CityRequestPojo;
+import edu.lab.back.dtoPojos.request.CityRequestPojo;
 import edu.lab.back.service.validator.CityValidator;
 import edu.lab.back.util.ValidationMessages;
 import edu.lab.back.util.exception.InvalidPayloadException;

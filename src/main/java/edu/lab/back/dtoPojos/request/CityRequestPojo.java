@@ -1,14 +1,14 @@
-package edu.lab.back.json.request;
+package edu.lab.back.dtoPojos.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import edu.lab.back.db.entity.CityEntity;
-import edu.lab.back.json.JsonPojo;
+import edu.lab.back.dtoPojos.DtoPojo;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class CityRequestPojo implements JsonPojo {
+public class CityRequestPojo implements DtoPojo {
 
     @JsonProperty(value = "id")
     private Long id;

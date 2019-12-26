@@ -1,11 +1,11 @@
-package edu.lab.back.json;
+package edu.lab.back.dtoPojos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import edu.lab.back.db.entity.ProfileTypeEntity;
 import lombok.Data;
 
 @Data
-public class ProfileTypeJson implements JsonPojo {
+public class ProfileTypePojo implements DtoPojo {
 
     @JsonProperty(value = "id")
     private Integer id;
@@ -13,12 +13,12 @@ public class ProfileTypeJson implements JsonPojo {
     @JsonProperty(value = "name")
     private String name;
 
-    public static ProfileTypeJson convert(final ProfileTypeEntity profileTypeEntity) {
+    public static ProfileTypePojo convert(final ProfileTypeEntity profileTypeEntity) {
         if (profileTypeEntity == null) {
             return null;
         }
 
-        final ProfileTypeJson profileTypeJson = new ProfileTypeJson();
+        final ProfileTypePojo profileTypeJson = new ProfileTypePojo();
         profileTypeJson.setId(profileTypeEntity.getId());
         profileTypeJson.setName(profileTypeEntity.getName());
 
