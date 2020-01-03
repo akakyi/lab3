@@ -3,17 +3,20 @@ package edu.lab.back.dtoPojos.response;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import edu.lab.back.db.entity.CityEntity;
 import edu.lab.back.db.entity.SchoolEntity;
-import edu.lab.back.dtoPojos.DtoPojo;
-import lombok.Data;
+import edu.lab.back.dtoPojos.XSLPojo;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Data
+@Setter
 @NoArgsConstructor
 //@JacksonXmlRootElement(localName = "city")
-public class CityResponsePojo implements DtoPojo {
+@XmlRootElement(name = "city")
+public class CityResponsePojo implements XSLPojo {
 
     @JsonProperty(value = "id")
     private Long id;
@@ -27,6 +30,20 @@ public class CityResponsePojo implements DtoPojo {
     @JsonProperty(value = "schools_ids")
     private List<Long> schoolsIds;
 
+    @XmlElement(name = "id")
+    public Long getId() {
+        return id;
+    }
+
+    @XmlElement(name = "name")
+    public String getName() {
+        return name;
+    }
+
+    @XmlElement(name = "schools_ids")
+    public List<Long> getSchoolsIds() {
+        return schoolsIds;
+    }
 
     public static CityResponsePojo convert(final CityEntity cityEntity) {
         if (cityEntity == null) {
@@ -49,4 +66,8 @@ public class CityResponsePojo implements DtoPojo {
         return cityResponsePojo;
     }
 
+    @Override
+    public String getTemplateName() {
+        return "city_template";
+    }
 }

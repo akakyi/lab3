@@ -3,14 +3,18 @@ package edu.lab.back.dtoPojos.response;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import edu.lab.back.db.entity.ProfileEntity;
 import edu.lab.back.db.entity.ProfileTypeEntity;
-import edu.lab.back.dtoPojos.DtoPojo;
+import edu.lab.back.dtoPojos.XSLPojo;
 import edu.lab.back.util.ProfileTypeEnum;
-import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@Setter
 @NoArgsConstructor
-public class ProfileResponsePojo implements DtoPojo {
+@XmlRootElement(name = "profile")
+public class ProfileResponsePojo implements XSLPojo {
 
     @JsonProperty(value = "id")
     private Long id;
@@ -26,6 +30,31 @@ public class ProfileResponsePojo implements DtoPojo {
 
     @JsonProperty(value = "class_level")
     private String classLevel;
+
+    @XmlElement(name = "id")
+    public Long getId() {
+        return id;
+    }
+
+    @XmlElement(name = "name")
+    public String getName() {
+        return name;
+    }
+
+    @XmlElement(name = "age")
+    public Integer getAge() {
+        return age;
+    }
+
+    @XmlElement(name = "profile_type")
+    public ProfileTypeEnum getProfileType() {
+        return profileType;
+    }
+
+    @XmlElement(name = "class_level")
+    public String getClassLevel() {
+        return classLevel;
+    }
 
     public static ProfileResponsePojo convert(final ProfileEntity profileEntity) {
         if (profileEntity == null) {
@@ -46,4 +75,8 @@ public class ProfileResponsePojo implements DtoPojo {
         return result;
     }
 
+    @Override
+    public String getTemplateName() {
+        return "profile_template";
+    }
 }

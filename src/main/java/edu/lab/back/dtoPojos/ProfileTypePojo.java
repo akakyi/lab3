@@ -5,7 +5,7 @@ import edu.lab.back.db.entity.ProfileTypeEntity;
 import lombok.Data;
 
 @Data
-public class ProfileTypePojo implements DtoPojo {
+public class ProfileTypePojo implements DTOPojo {
 
     @JsonProperty(value = "id")
     private Integer id;

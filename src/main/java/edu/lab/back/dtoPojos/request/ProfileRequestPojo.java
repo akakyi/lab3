@@ -1,14 +1,14 @@
 package edu.lab.back.dtoPojos.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import edu.lab.back.dtoPojos.DtoPojo;
+import edu.lab.back.dtoPojos.DTOPojo;
 import edu.lab.back.util.ProfileTypeEnum;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class ProfileRequestPojo implements DtoPojo {
+public class ProfileRequestPojo implements DTOPojo {
 
     @JsonProperty(value = "id")
     private Long id;

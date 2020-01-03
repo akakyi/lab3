@@ -1,11 +1,11 @@
 package edu.lab.back.service.crud;
 
-import edu.lab.back.dtoPojos.DtoPojo;
+import edu.lab.back.dtoPojos.DTOPojo;
 import edu.lab.back.util.exception.ResourceNotFoundException;
 
 import java.util.List;
 
-public interface BaseCrudService<RequestJsonType extends DtoPojo, ResponseJsonType extends DtoPojo, Id> {
+public interface BaseCrudService<RequestJsonType extends DTOPojo, ResponseJsonType extends DTOPojo, Id> {
 
     ResponseJsonType getById(Id id) throws ResourceNotFoundException;
 

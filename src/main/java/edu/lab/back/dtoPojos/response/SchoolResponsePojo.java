@@ -3,16 +3,19 @@ package edu.lab.back.dtoPojos.response;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import edu.lab.back.db.entity.ProfileEntity;
 import edu.lab.back.db.entity.SchoolEntity;
-import edu.lab.back.dtoPojos.DtoPojo;
-import lombok.Data;
+import edu.lab.back.dtoPojos.XSLPojo;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Data
+@Setter
 @NoArgsConstructor
-public class SchoolResponsePojo implements DtoPojo {
+@XmlRootElement(name = "school")
+public class SchoolResponsePojo implements XSLPojo {
 
     @JsonProperty(value = "id")
     private Long id;
@@ -21,9 +24,24 @@ public class SchoolResponsePojo implements DtoPojo {
     private String name;
 
     //TODO в рамках лабы норм, но лучше бы тут лежали просто айдишники
-//    @JsonProperty(value = "profiles")
+    @JsonProperty(value = "profiles")
 //    private List<ProfileResponsePojo> profiles;
     private List<Long> profilesIds;
+
+    @XmlElement(name = "id")
+    public Long getId() {
+        return id;
+    }
+
+    @XmlElement(name = "name")
+    public String getName() {
+        return name;
+    }
+
+    @XmlElement(name = "profiles")
+    public List<Long> getProfilesIds() {
+        return profilesIds;
+    }
 
     public static SchoolResponsePojo convert(final SchoolEntity schoolEntity) {
         if (schoolEntity == null) {
@@ -46,4 +64,8 @@ public class SchoolResponsePojo implements DtoPojo {
         return result;
     }
 
+    @Override
+    public String getTemplateName() {
+        return "school_template";
+    }
 }
