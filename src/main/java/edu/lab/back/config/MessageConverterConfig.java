@@ -1,6 +1,9 @@
 package edu.lab.back.config;
 
+import edu.lab.back.util.constants.UrlPatterns;
 import edu.lab.back.util.converters.CustomJaxb2RootElementHttpMessageConverter;
+import lombok.NonNull;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,8 +15,12 @@ public class MessageConverterConfig {
 
     @Bean
     @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public Jaxb2RootElementHttpMessageConverter jaxb2RootElementHttpMessageConverter() {
-        final Jaxb2RootElementHttpMessageConverter res = new CustomJaxb2RootElementHttpMessageConverter();
+    @Autowired
+    public Jaxb2RootElementHttpMessageConverter jaxb2RootElementHttpMessageConverter(
+            @NonNull final UrlPatterns urlPatterns
+    )
+    {
+        final Jaxb2RootElementHttpMessageConverter res = new CustomJaxb2RootElementHttpMessageConverter(urlPatterns);
         return res;
     }
 

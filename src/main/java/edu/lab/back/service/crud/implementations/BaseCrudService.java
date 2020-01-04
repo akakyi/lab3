@@ -1,6 +1,6 @@
 package edu.lab.back.service.crud.implementations;
 
-import edu.lab.back.util.ValidationMessages;
+import edu.lab.back.util.constants.ValidationMessages;
 import edu.lab.back.util.exception.DataIsBindedException;
 import edu.lab.back.util.exception.ResourceNotFoundException;
 import lombok.NonNull;
@@ -12,6 +12,8 @@ import java.util.Optional;
 public abstract class BaseCrudService<Entity, Id> {
 
     protected abstract CrudRepository<Entity, Id> getRepo();
+
+    protected abstract ValidationMessages getValidationMessages();
 
     protected Entity getEntityById(@NonNull final Id id) {
         final Optional<Entity> entityOptional = this.getRepo().findById(id);
@@ -33,7 +35,7 @@ public abstract class BaseCrudService<Entity, Id> {
         try {
             repo.delete(entity);
         } catch (DataIntegrityViolationException e) {
-            throw new DataIsBindedException(ValidationMessages.CONTRAIN_VIOLATION);
+            throw new DataIsBindedException(getValidationMessages().getContrainViolation());
         }
 
         return entity;

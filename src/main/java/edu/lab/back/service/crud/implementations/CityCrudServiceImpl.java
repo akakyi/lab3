@@ -5,6 +5,7 @@ import edu.lab.back.db.repositories.CityRepository;
 import edu.lab.back.dtoPojos.request.CityRequestPojo;
 import edu.lab.back.dtoPojos.response.CityResponsePojo;
 import edu.lab.back.service.crud.CityCrudService;
+import edu.lab.back.util.constants.ValidationMessages;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,9 +23,17 @@ public class CityCrudServiceImpl extends BaseCrudService<CityEntity, Long> imple
     @NonNull
     private final CityRepository cityRepository;
 
+    @NonNull
+    private final ValidationMessages validationMessages;
+
     @Override
     protected CityRepository getRepo() {
         return this.cityRepository;
+    }
+
+    @Override
+    protected ValidationMessages getValidationMessages() {
+        return this.validationMessages;
     }
 
     @Override

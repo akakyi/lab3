@@ -4,6 +4,7 @@ import edu.lab.back.db.entity.ProfileTypeEntity;
 import edu.lab.back.db.repositories.ProfileTypeRepository;
 import edu.lab.back.dtoPojos.ProfileTypePojo;
 import edu.lab.back.service.crud.ProfileTypeCrudService;
+import edu.lab.back.util.constants.ValidationMessages;
 import edu.lab.back.util.exception.ResourceNotFoundException;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -24,9 +25,17 @@ public class ProfileTypeCrudServiceImpl
     @NonNull
     private final ProfileTypeRepository repository;
 
+    @NonNull
+    private final ValidationMessages validationMessages;
+
     @Override
     protected CrudRepository<ProfileTypeEntity, Integer> getRepo() {
         return this.repository;
+    }
+
+    @Override
+    protected ValidationMessages getValidationMessages() {
+        return this.validationMessages;
     }
 
     @Override

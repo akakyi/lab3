@@ -6,6 +6,7 @@ import edu.lab.back.db.repositories.SchoolRepository;
 import edu.lab.back.dtoPojos.request.SchoolRequestPojo;
 import edu.lab.back.dtoPojos.response.SchoolResponsePojo;
 import edu.lab.back.service.crud.SchoolService;
+import edu.lab.back.util.constants.ValidationMessages;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,9 +22,17 @@ public class SchoolServiceImpl extends BaseCrudService<SchoolEntity, Long> imple
     @NonNull
     private final SchoolRepository schoolRepository;
 
+    @NonNull
+    private final ValidationMessages validationMessages;
+
     @Override
     protected SchoolRepository getRepo() {
         return this.schoolRepository;
+    }
+
+    @Override
+    protected ValidationMessages getValidationMessages() {
+        return this.validationMessages;
     }
 
     @Override

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,7 +41,8 @@ public class CityResponsePojo implements XSLPojo {
         return name;
     }
 
-    @XmlElement(name = "schools_ids")
+    @XmlElementWrapper(name = "school_ids")
+    @XmlElement(name = "id")
     public List<Long> getSchoolsIds() {
         return schoolsIds;
     }

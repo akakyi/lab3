@@ -2,6 +2,7 @@ package edu.lab.back.util;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.NonNull;
+import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 

@@ -8,6 +8,7 @@ import edu.lab.back.db.repositories.ProfileTypeRepository;
 import edu.lab.back.dtoPojos.request.ProfileRequestPojo;
 import edu.lab.back.dtoPojos.response.ProfileResponsePojo;
 import edu.lab.back.service.crud.ProfileService;
+import edu.lab.back.util.constants.ValidationMessages;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,14 @@ public class ProfileServiceImpl extends BaseCrudService<ProfileEntity, Long> imp
 
     @NonNull
     private final ProfileTypeRepository profileTypeRepository;
+
+    @NonNull
+    private final ValidationMessages validationMessages;
+
+    @Override
+    protected ValidationMessages getValidationMessages() {
+        return this.validationMessages;
+    }
 
     @Override
     protected ProfileRepository getRepo() {

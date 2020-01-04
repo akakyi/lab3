@@ -1,10 +1,11 @@
 package edu.lab.back.controller;
 
 import edu.lab.back.dtoPojos.request.CityRequestPojo;
+import edu.lab.back.dtoPojos.response.CitiesResponsePojo;
 import edu.lab.back.dtoPojos.response.CityResponsePojo;
 import edu.lab.back.service.crud.CityCrudService;
 import edu.lab.back.service.validator.CityValidator;
-import edu.lab.back.util.UrlPatterns;
+import edu.lab.back.util.constants.UrlPatterns;
 import edu.lab.back.util.exception.InvalidPayloadException;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,9 +54,13 @@ public class CityController {
             MediaType.APPLICATION_JSON_VALUE
         }
     )
-    public List<CityResponsePojo> getAllCityes() {
+    public CitiesResponsePojo getAllCityes() {
+        final CitiesResponsePojo result = new CitiesResponsePojo();
+
         final List<CityResponsePojo> cityes = this.cityCrudService.getAll();
-        return cityes;
+        result.setCities(cityes);
+
+        return result;
     }
 
     @RequestMapping(

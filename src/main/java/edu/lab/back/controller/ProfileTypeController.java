@@ -1,8 +1,9 @@
 package edu.lab.back.controller;
 
 import edu.lab.back.dtoPojos.ProfileTypePojo;
+import edu.lab.back.dtoPojos.ProfileTypesResponsePojo;
 import edu.lab.back.service.crud.ProfileTypeCrudService;
-import edu.lab.back.util.UrlPatterns;
+import edu.lab.back.util.constants.UrlPatterns;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -43,8 +44,11 @@ public class ProfileTypeController {
             MediaType.APPLICATION_JSON_VALUE
         }
     )
-    public List<ProfileTypePojo> getAll() {
-        final List<ProfileTypePojo> result = this.profileTypeCrudService.getAll();
+    public ProfileTypesResponsePojo getAll() {
+        final ProfileTypesResponsePojo result = new ProfileTypesResponsePojo();
+
+        final List<ProfileTypePojo> types = this.profileTypeCrudService.getAll();
+        result.setTypes(types);
 
         return result;
     }

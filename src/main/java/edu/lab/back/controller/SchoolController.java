@@ -4,7 +4,7 @@ import edu.lab.back.dtoPojos.request.SchoolRequestPojo;
 import edu.lab.back.dtoPojos.response.SchoolResponsePojo;
 import edu.lab.back.service.crud.SchoolService;
 import edu.lab.back.service.validator.SchoolValidator;
-import edu.lab.back.util.UrlPatterns;
+import edu.lab.back.util.constants.UrlPatterns;
 import edu.lab.back.util.exception.InvalidPayloadException;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;

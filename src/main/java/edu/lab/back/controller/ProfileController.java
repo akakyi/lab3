@@ -2,9 +2,10 @@ package edu.lab.back.controller;
 
 import edu.lab.back.dtoPojos.request.ProfileRequestPojo;
 import edu.lab.back.dtoPojos.response.ProfileResponsePojo;
+import edu.lab.back.dtoPojos.response.ProfilesResponsePojo;
 import edu.lab.back.service.crud.ProfileService;
 import edu.lab.back.service.validator.ProfileValidator;
-import edu.lab.back.util.UrlPatterns;
+import edu.lab.back.util.constants.UrlPatterns;
 import edu.lab.back.util.exception.InvalidPayloadException;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,10 +63,13 @@ public class ProfileController {
             MediaType.APPLICATION_JSON_VALUE
         }
     )
-    public List<ProfileResponsePojo> getAllProfiles() {
-        final List<ProfileResponsePojo> profiles = this.profileService.getAll();
+    public ProfilesResponsePojo getAllProfiles() {
+        final ProfilesResponsePojo result = new ProfilesResponsePojo();
 
-        return profiles;
+        final List<ProfileResponsePojo> profiles = this.profileService.getAll();
+        result.setProfiles(profiles);
+
+        return result;
     }
 
     @RequestMapping(

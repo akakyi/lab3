@@ -1,6 +1,7 @@
 package edu.lab.back.controller;
 
 import edu.lab.back.dtoPojos.response.ProfileResponsePojo;
+import edu.lab.back.dtoPojos.response.ProfilesResponsePojo;
 import edu.lab.back.service.crud.ProfileService;
 import edu.lab.back.util.exception.InvalidPayloadException;
 import lombok.NonNull;
@@ -31,13 +32,16 @@ public class ProfileBySchoolController {
             MediaType.APPLICATION_XML_VALUE,
             MediaType.APPLICATION_JSON_VALUE
         })
-    public List<ProfileResponsePojo> getProfilesBySchool(
+    public ProfilesResponsePojo getProfilesBySchool(
         @PathVariable("id") Long id
     ) throws InvalidPayloadException
     {
-        final List<ProfileResponsePojo> profiles = this.profileService.getProfileBySchoolId(id);
+        final ProfilesResponsePojo result = new ProfilesResponsePojo();
 
-        return profiles;
+        final List<ProfileResponsePojo> profiles = this.profileService.getProfileBySchoolId(id);
+        result.setProfiles(profiles);
+
+        return result;
     }
 
 }

@@ -1,6 +1,7 @@
 package edu.lab.back.controller;
 
 import edu.lab.back.dtoPojos.response.SchoolResponsePojo;
+import edu.lab.back.dtoPojos.response.SchoolsResponsePojo;
 import edu.lab.back.service.crud.SchoolService;
 import edu.lab.back.util.exception.InvalidPayloadException;
 import lombok.NonNull;
@@ -30,12 +31,15 @@ public class SchoolByCityController {
             MediaType.APPLICATION_JSON_VALUE
         }
     )
-    protected List<SchoolResponsePojo> getSchoolsByCity(
+    protected SchoolsResponsePojo getSchoolsByCity(
         @PathVariable("id") Long id
     ) throws InvalidPayloadException {
-        final List<SchoolResponsePojo> schools = this.schoolService.getSchoolsByCityId(id);
+        final SchoolsResponsePojo result = new SchoolsResponsePojo();
 
-        return schools;
+        final List<SchoolResponsePojo> schools = this.schoolService.getSchoolsByCityId(id);
+        result.setSchools(schools);
+
+        return result;
     }
 
 }
