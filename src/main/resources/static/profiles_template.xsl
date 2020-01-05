@@ -6,24 +6,31 @@
     <xsl:template match="/">
         <html>
             <body>
-                <h2>Cities:</h2>
+                <h2>Profiles:</h2>
                 <table border="1">
                     <tr bgcolor="#9acd32">
                         <th>Id</th>
                         <th>Name</th>
+                        <th>Age</th>
+                        <th>Class level</th>
+                        <th>Profile type</th>
                     </tr>
-                    <xsl:for-each select="cities/cities_array/city">
+                    <xsl:for-each select="profiles/profiles_array/profile">
                         <tr>
                             <td>
                                 <xsl:value-of select="id"/>
                             </td>
                             <td>
-                                <a>
-                                    <xsl:attribute name="href">
-                                        <xsl:value-of select="concat('/lab3/school_of_city/', id)"/>
-                                    </xsl:attribute>
-                                    <xsl:value-of select="name"/>
-                                </a>
+                                <xsl:value-of select="name"/>
+                            </td>
+                            <td>
+                                <xsl:value-of select="age"/>
+                            </td>
+                            <td>
+                                <xsl:value-of select="class_level"/>
+                            </td>
+                            <td>
+                                <xsl:value-of select="profile_type"/>
                             </td>
                         </tr>
                     </xsl:for-each>

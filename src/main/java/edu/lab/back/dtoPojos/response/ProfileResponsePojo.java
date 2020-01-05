@@ -5,11 +5,13 @@ import edu.lab.back.db.entity.ProfileEntity;
 import edu.lab.back.db.entity.ProfileTypeEntity;
 import edu.lab.back.dtoPojos.XSLPojo;
 import edu.lab.back.util.ProfileTypeEnum;
+import edu.lab.back.util.converters.adapters.ProfileTypeAdapter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @Setter
 @NoArgsConstructor
@@ -47,6 +49,7 @@ public class ProfileResponsePojo implements XSLPojo {
     }
 
     @XmlElement(name = "profile_type")
+    @XmlJavaTypeAdapter(ProfileTypeAdapter.class)
     public ProfileTypeEnum getProfileType() {
         return profileType;
     }
